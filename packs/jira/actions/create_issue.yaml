@@ -26,3 +26,7 @@ parameters:
     type: object
     description: "extra fields like priority, labels, custom fields, etc"
     required: false
+  assignee:
+    type: string
+    description: to whom to assign this ticket
+    required: false

@@ -4,7 +4,7 @@ __all__ = [
 ]
 
 
-def to_issue_dict(issue):
+def to_issue_dict(issue, assignee):
     """
     :rtype: ``dict``
     """
@@ -21,10 +21,10 @@ def to_issue_dict(issue):
     else:
         reporter = None
 
-    if issue.fields.assignee:
-        assignee = issue.fields.assignee.displayName
+    if assignee:
+        assignee = assignee
     else:
-        assignee = None
+	    assignee = issue.fields.assignee.displayName
 
     result = {
         'id': issue.id,

@@ -9,7 +9,7 @@ __all__ = [
 class CreateJiraIssueAction(BaseJiraAction):
 
     def run(self, summary, type, description=None,
-            project=None, extra_fields=None):
+            project=None, extra_fields=None, assignee=None):
         project = project or self.config['project']
         data = {
             'project': {'key': project},
@@ -24,5 +24,9 @@ class CreateJiraIssueAction(BaseJiraAction):
             data.update(extra_fields)
 
         issue = self._client.create_issue(fields=data)
-        result = to_issue_dict(issue)
+
+        if assignee:
+            self._client.assign_issue(issue.key, assignee)
+
+        result = to_issue_dict(issue, assignee)
         return result
