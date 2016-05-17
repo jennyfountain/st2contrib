@@ -21,9 +21,7 @@ def to_issue_dict(issue, assignee):
     else:
         reporter = None
 
-    if assignee:
-        assignee = assignee
-    else:
+    if not assignee:
 	    assignee = issue.fields.assignee.displayName
 
     result = {
